@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   header.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jerollin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/06/17 19:40:08 by jerollin          #+#    #+#             */
-/*   Updated: 2016/06/17 20:36:45 by jerollin         ###   ########.fr       */
+/*   Created: 2016/01/11 21:23:33 by jerollin          #+#    #+#             */
+/*   Updated: 2016/01/14 17:18:14 by jerollin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
+#include <string.h>
 
-int			main(int  argc, char *argv[])
+char	*ft_strstr(const char *s1, const char *s2)
 {
-	char	*path;
-	int	argnum;
-	int	option;
-	
-	argnum = 1;
-	path = NULL;
-	while (argnum != argc)
-        {
-		if (argv[argnum][0] == '-')
+	size_t i;
+	size_t j;
+
+	i = 0;
+	j = 0;
+	if (s2[i] == '\0')
+		return ((char *)s1);
+	while (s1[i])
+	{
+		if (s1[i] == s2[j])
 		{
-			option = 1;
-                        ft_putstr("!------YES RASTA FA RI-------!");
-			ft_putstr("\n");
+			while (s1[i] == s2[j] && s1[i] && s2[j])
+			{
+				i++;
+				j++;
+			}
+			if (s2[j] == '\0')
+				return ((char *)&s1[i - ft_strlen(s2)]);
+			i = i - j + 1;
+			j = 0;
 		}
-		if (argv[argnum][0] != '-')
-			path = argv[argnum];
-		argnum++;
+		i++;
 	}
-	if (path == NULL)
-		path = ".";
-	open_read_ls(path);
+	return (NULL);
 }

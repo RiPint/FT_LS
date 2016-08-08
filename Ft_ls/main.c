@@ -15,18 +15,25 @@
 int			main(int  argc, char *argv[])
 {
 	char	*path;
+	char	*optiontype;
 	int	argnum;
 	int	option;
+	int	argletter;
 	
+	optiontype = malloc(sizeof(char) * 100);
+	argletter = 0;
 	argnum = 1;
 	path = NULL;
 	while (argnum != argc)
         {
 		if (argv[argnum][0] == '-')
 		{
-			option = 1;
-                        ft_putstr("!------YES RASTA FA RI-------!");
-			ft_putstr("\n");
+			while(argv[argnum][argletter])
+			{
+				optiontype[argletter] = argv[argnum][argletter];
+				argletter++;
+			}
+			optiontype[argletter] = '\0';
 		}
 		if (argv[argnum][0] != '-')
 			path = argv[argnum];
